@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}My Records{% endblock %}
+{% block content %}
+<h1>My Records List</h1>
+
+<div class="habit-list">
+    {% for habit in habits %}
+    <div class="habit-card">
+        <h3><u>{{ habit.name }}</u></h3>
+        <p><i>{{ habit.description }}</i></p>
+        <div class="habit-card">
+            <ul>
+                {% for record in habit.records.all %}
+                <li>{% if record.completed %}Completed{% endif %} - {{ record.date }}</li>
+                <p>Completed: {{ record.completed_count }}</p>
+                {% if record.notes %}
+                <h5>Notes:</h5>
+                <p>{{ record.notes }}</p>
+                <a href="{% url 'records_update' record.pk %}">Edit</a>
+                <a href="{{ record.pk }}/delete">Delete</a>
+
+                {% endif %}
+
+                {% empty %}
+                <li>No records yet.</li>
+                {% endfor %}
+            </ul>
+            <a href="{% url 'habit_record' habit.pk %}">Add Record</a>
+        </div>
+
+
+    </div>
+
+    {% endfor %}
+    <a href="{% url 'habit_list_create' %}">Go to Habits</a>
+</div>
+{% endblock %}

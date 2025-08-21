@@ -1,0 +1,96 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Habit Tracker{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+        integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+    {% block extra_head %}{% endblock %}
+</head>
+
+<body>
+    <header>
+        <div class="navbar">
+            <div>
+                <a href="{% url 'habit_list_create' %}">Checka</a>
+            </div>
+            <div class="menu">
+                <p>Welcome back, {{ username }} </p>
+                <a href="{% url 'habit_list_create' %}">My Habits</a>
+                <a href="{% url 'records' %}">Records</a>
+                <form method="post" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button type="submit">Logout</button>
+                </form>
+                <div class="header__toggle" id="header=toggle">
+                    <i class='bxr  bxs-menu-filter bx-rotate-180 bx-flip-horizontal'></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="nav">
+        <div class="nav__menu container">
+            <div class="nav__shape">
+            </div>
+            <div class="nav__close" id="nav__close">
+                <i class='bxr  bx-x'></i>
+            </div>
+
+
+            <div class="nav__mask">
+                <img src="{% static 'images/Pic.jpg' %}" alt="" class="nav__img">
+            </div>
+
+            <span class="nav__greeting">Welcome, <h1> {{ username }}</h1></span>
+
+            <ul class="nav__list">
+                <li class="nav__item">
+                    <a href="#" class="nav__link">
+                        <i class='bxr  bxs-home-alt-2 bx-rotate-180 bx-flip-horizontal'></i> Home
+                    </a>
+                </li>
+
+                <li class="nav__item">
+                    <a href="#" class="nav__link">
+                        <i class='bxr  bxs-file-report bx-rotate-180 bx-flip-horizontal'></i> Records
+                    </a>
+                </li>
+
+                <li class="nav__item">
+                    <a href="#" class="nav__link">
+                        <i class="fa-solid fa-plus"></i> Add Category
+                    </a>
+                </li>
+
+                <li class="nav__item">
+                    <a href="#" class="nav__link">
+                        <i class='bxr  bx-user'></i> Profile
+                    </a>
+                </li>
+
+                <li class="nav__item">
+                    <a href="#" class="nav__link">
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        {% block content %}
+        <!-- Page content goes here -->
+        {% endblock %}
+    </div>
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+
+</html>

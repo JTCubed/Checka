@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Habit Tracker{% endblock %}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .navbar {
+            background: #333;
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            margin-right: 15px;
+        }
+
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+
+        .menu {
+            display: flex;
+            align-items: center;
+        }
+
+        .container {
+            margin: 30px auto;
+            max-width: 800px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+    </style>
+    {% block extra_head %}{% endblock %}
+</head>
+
+<body>
+    <div class="navbar">
+        <div>
+            <a href="{% url 'habit_list_create' %}">Home</a>
+        </div>
+        <div class="menu">
+            <p>Welcome back, {{ username }} </p>
+            <a href="{% url 'habit_list_create' %}">My Habits</a>
+            <a href="{% url 'records' %}">Records</a>
+            <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit">Logout</button>
+            </form>
+
+        </div>
+    </div>
+    <div class="container">
+        {% block content %}
+        <!-- Page content goes here -->
+        {% endblock %}
+    </div>
+</body>
+
+</html>

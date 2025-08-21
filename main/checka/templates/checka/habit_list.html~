@@ -1,0 +1,102 @@
+{% extends "checka/base.html" %}
+{% block title %}My Habits{% endblock %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Habit Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            /* margin: 20px; */
+            background-color: #f0f0f0;
+        }
+
+        .habit-list {
+            display: grid;
+            gap: 10px;
+        }
+
+        .habit-card {
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-container {
+            margin-top: 20px;
+        }
+
+        .category-select {
+            margin-bottom: 10px;
+        }
+
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+    </form>
+
+    <h1>My Habits</h1>
+    {% if error_message %}
+    <div class="error">{{ error_message }}</div>
+    {% endif %}
+    <div class="form-container">
+        <h2>Add New Habit</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.name.label_tag }} {{ form.name }}<br>
+            {{ form.description.label_tag }} {{ form.description }}<br>
+            {{ form.frequency.label_tag }} {{ form.frequency }}<br>
+            {{ form.target_count.label_tag }} {{ form.target_count }}<br>
+            <div class="category-select">
+                {{ form.category.label_tag }} {{ form.category }}
+                {% if form.category.errors %}
+                <span style="color: red;">{{ form.category.errors }}</span>
+                {% endif %}
+            </div>
+            <button type="submit">Save</button>
+        </form>
+    </div>
+
+    <div class="habit-list">
+        {% for habit in object_list %}
+        <div class="habit-card">
+            <h3>{{ habit.name }}</h3>
+            <p>{{ habit.description }}</p>
+            <p>Frequency: {{ habit.get_frequency_display }}</p>
+            <p>Target: {{ habit.target_count }} times</p>
+            {% if habit.category %}
+            <p>Category: {{ habit.category.name }}</p>
+            {% else %}
+            <p>Category: None</p>
+            {% endif %}
+            <a href="{% url 'habit_update' habit.pk %}">Edit</a>
+        </div>
+        {% empty %}
+        <p>No habits yet. Add one below!</p>
+        {% endfor %}
+    </div>
+    <!-- In habit_tracker/habit_list.html -->
+    <a href="{% url 'logout' %}">Logout</a>
+    <h3>Available Categories</h3>
+    <ul>
+        {% for category in categories %}
+        <li>{{ category.name }}</li>
+        {% endfor %}
+    </ul>
+    <!-- </body>
+
+</html> -->
+
+    {% endblock %}

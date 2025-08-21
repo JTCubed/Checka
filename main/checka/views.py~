@@ -1,0 +1,30 @@
+from django.conf import settings
+from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
+from django.contrib.auth.decorators import login_required
+from .models import Habit, Category
+from .forms import HabitForm
+
+@login_required(login_url=settings.LOGIN_URL)
+def habit_list_create(request):
+    # List habits for the user
+    habits = Habit.objects.filter(user=request.user)
+    categories = Category.objects.filter(user__in=[request.user, None]).distinct()
+
+    if request.method == 'POST':
+        form = HabitForm(request.POST)
+        form.user = request.user  # Pass user to form if needed
+        if form.is_valid():
+            habit = form.save(commit=False)
+            habit.user = request.user
+            habit.save()
+            return redirect(reverse_lazy('main:habit_list_create'))
+    else:
+        form = HabitForm()
+
+    context = {
+        'object_list': habits,
+        'form': form,
+        'categories': categories,
+    }
+    return render(request, 'checka/habit_list.html', context)

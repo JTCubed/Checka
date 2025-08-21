@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %} {{ habit.name }} {% endblock %}
+{% block content %}
+<div class="form-container">
+    <h2>Edit the {{ habit.name }} habit</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.name.label_tag }} {{ form.name }}<br>
+        {{ form.description.label_tag }} {{ form.description }}<br>
+        {{ form.frequency.label_tag }} {{ form.frequency }}<br>
+        {{ form.target_count.label_tag }} {{ form.target_count }}<br>
+        <div class="category-select">
+            {{ form.category.label_tag }} {{ form.category }}
+            {% if form.category.errors %}
+            <span style="color: red;">{{ form.category.errors }}</span>
+            {% endif %}
+        </div>
+        <button type="submit">Save</button>
+    </form>
+</div>
+{% endblock %}

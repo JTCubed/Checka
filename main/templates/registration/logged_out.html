@@ -1,0 +1,10 @@
+{% extends "checka/base.html" %}
+
+{% block content %}
+<div class="logout-page">
+    <h2>You’ve been logged out</h2>
+    <p>Thanks for using Checka! 👋</p>
+    <a href="{% url 'login' %}">Log back in</a>
+    <a href="{% url 'habit_list_create' %}">Go to habits</a>
+</div>
+{% endblock %}
