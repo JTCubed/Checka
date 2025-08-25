@@ -85,6 +85,10 @@ h3 {
     padding-bottom: 5px;
 }
 
+h1 {
+    text-align: center;
+}
+
 .nav {
 
     display: flex;
@@ -181,9 +185,11 @@ nav__mask {
     background-color: hsl(0, 0%, 24%);
     color: #FFF;
     padding: 8px;
+    border: 1px solid #8a8a8a;
     border-radius: 12px;
     transition: .3s;
     margin-top: 8px;
+    font-size: 14px;
 }
 
 input {
@@ -206,5 +212,16 @@ input {
     flex: 0 1 calc(50% - 20px);
     /* two per row, accounting for gap */
     box-sizing: border-box;
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    margin-top: 8px;
+    font-weight: bold;
+}
+
+.form-container {
     margin-bottom: 20px;
 }
