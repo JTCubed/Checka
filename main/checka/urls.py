@@ -12,5 +12,6 @@ urlpatterns = [
     path('register/', views.register_view, name='register'),
     path('records/', views.habit_record_list, name='records'),
     path('records/<int:pk>', views.habit_record_edit, name='records_update'),
-    path('records/<int:pk>/delete', views.habit_record_delete, name='records_delete')
+    path('records/<int:pk>/delete', views.habit_record_delete, name='records_delete'),
+    path('', views.landing_page, name='landing_page'),
 ]

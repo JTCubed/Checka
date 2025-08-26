@@ -8,6 +8,7 @@ from .forms import HabitForm, HabitRecordForm, CategoryCreateForm, loginform, re
 from datetime import date
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
+from datetime import datetime
 
 
 @login_required(login_url=settings.LOGIN_URL)
@@ -189,3 +190,6 @@ def logout_view(request):
 
 
 
+def landing_page(request):
+    categories = Category.objects.filter(user=None)[:6]  # default categories
+    return render(request, 'landing_page.html', {'categories': categories, 'year': datetime.now().year})
