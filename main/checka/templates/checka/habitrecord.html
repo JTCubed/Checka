@@ -1,14 +1,16 @@
 {% extends "base.html" %}
 {% block title %}Habit Record for {{ habit.name }}{% endblock %}
 {% block content %}
-<div class="form-container">
-    <h2>Record for {{ habit.name }}</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.completed.label_tag }} {{ form.completed }}<br>
-        {{ form.completed_count.label_tag }} {{ form.completed_count }}<br>
-        {{ form.notes.label_tag }} {{ form.notes }}<br>
-        <button type="submit">Save Record</button>
-    </form>
+<div class="container">
+    <div class="form-container">
+        <h2>Record for {{ habit.name }}</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.completed.label_tag }} {{ form.completed }}<br>
+            {{ form.completed_count.label_tag }} {{ form.completed_count }}<br>
+            {{ form.notes.label_tag }} {{ form.notes }}<br>
+            <button type="submit" class="btn-solid">Save Record</button>
+        </form>
+    </div>
 </div>
 {% endblock %}

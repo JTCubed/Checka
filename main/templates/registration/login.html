@@ -1,22 +1,24 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 
-<body>
-    <div class="container">
+<body class="register-container">
+    <div class="container login-container">
         <h2>Login</h2>
         <form method="post" action="{% url 'login' %}">
             {% csrf_token %}
             {{ form.as_p }}
             <input type="hidden" name="next" value="/habits/">
-            <button type="submit">Login</button>
+            <button type="submit" class="btn-solid">Login</button>
         </form>
         <p><a href="{% url 'password_reset' %}">Forgot password?</a></p>
-        <p>No account yet? <a href="{% url 'register' %}">Register here</a></p>
+        <p>No account yet? <a href="{% url 'register' %}" class="areg">Register here</a></p>
     </div>
 </body>
 

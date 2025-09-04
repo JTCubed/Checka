@@ -1,37 +1,42 @@
 {% extends 'base.html' %}
 {% block title %}Create Category{% endblock %}
 {% block content %}
-<div class="form-container">
-    <h2>Create a New Category</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.name.label_tag }} {{ form.name }}<br>
-        {{ form.description.label_tag }} {{ form.description }}<br>
-        <button type="submit">Create Category</button>
-    </form>
-    {% if form.errors %}
-    <div class="error">
-        {% for field in form %}
-        {% for error in field.errors %}
-        <p>{{ error }}</p>
-        {% endfor %}
-        {% endfor %}
-        {% for error in form.non_field_errors %}
-        <p>{{ error }}</p>
-        {% endfor %}
+<div class="container">
+    <div class="form-container">
+        <h2>Create a New Category</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.name.label_tag }} {{ form.name }}<br>
+            {{ form.description.label_tag }} {{ form.description }}<br>
+            <button type="submit" class="btn-outline">Create Category</button>
+            <a href="{% url 'habit_list_create' %}" class="btn-outline">Cancel</a>
+        </form>
+        {% if form.errors %}
+        <div class="error">
+            {% for field in form %}
+            {% for error in field.errors %}
+            <p>{{ error }}</p>
+            {% endfor %}
+            {% endfor %}
+            {% for error in form.non_field_errors %}
+            <p>{{ error }}</p>
+            {% endfor %}
+        </div>
+        {% endif %}
     </div>
-    {% endif %}
-</div>
 
-<div class="category-list">
-    <h3>Existing Categories</h3>
-    <ul>
-        {% for dcategory in dcategories %}
-        <li><u><b>{{ dcategory.name }}</b></u> - {{ dcategory.description }}</li>
-        {% endfor %}
-        {% for category in categories %}
-        <li><u><b>{{ category.name }}</b></u> - {{ category.description }}</li>
-        {% endfor %}
-    </ul>
+</div>
+<div class="container">
+    <div class="category-list">
+        <h3>Existing Categories</h3>
+        <ul>
+            {% for dcategory in dcategories %}
+            <li><u><b>{{ dcategory.name }}</b></u> - {{ dcategory.description }}</li>
+            {% endfor %}
+            {% for category in categories %}
+            <li><u><b>{{ category.name }}</b></u> - {{ category.description }}</li>
+            {% endfor %}
+        </ul>
+    </div>
 </div>
 {% endblock %}

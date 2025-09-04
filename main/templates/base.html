@@ -20,7 +20,7 @@
     <header>
         <div class="navbar">
             <div>
-                <a href="{% url 'habit_list_create' %}">Checka</a>
+                <a class="logo" href="{% url 'habit_list_create' %}">Checka</a>
             </div>
             <div class="menu">
                 <p>Welcome back, {{ username }} </p>
@@ -28,7 +28,7 @@
                 <a href="{% url 'records' %}">Records</a>
                 <form method="post" action="{% url 'logout' %}">
                     {% csrf_token %}
-                    <button type="submit">Logout</button>
+                    <button type="submit" class="btn-outline nav">Logout</button>
                 </form>
                 <div class="header__toggle" id="header=toggle">
                     <i class='bxr  bxs-menu-filter bx-rotate-180 bx-flip-horizontal'></i>
@@ -54,19 +54,19 @@
 
             <ul class="nav__list">
                 <li class="nav__item">
-                    <a href="#" class="nav__link">
+                    <a href="{% url 'habit_list_create' %}" class="nav__link">
                         <i class='bxr  bxs-home-alt-2 bx-rotate-180 bx-flip-horizontal'></i> Home
                     </a>
                 </li>
 
                 <li class="nav__item">
-                    <a href="#" class="nav__link">
+                    <a href="{% url 'records' %}" class="nav__link">
                         <i class='bxr  bxs-file-report bx-rotate-180 bx-flip-horizontal'></i> Records
                     </a>
                 </li>
 
                 <li class="nav__item">
-                    <a href="#" class="nav__link">
+                    <a href="{% url 'category_create' %}" class="nav__link">
                         <i class="fa-solid fa-plus"></i> Add Category
                     </a>
                 </li>
@@ -78,18 +78,24 @@
                 </li>
 
                 <li class="nav__item">
-                    <a href="#" class="nav__link">
-                        <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
-                    </a>
+                    <form method="post" action="{% url 'logout' %}" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="nav__link"
+                            style="background:none; border:none; padding:0; cursor:pointer;">
+                            <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
+                        </button>
+                    </form>
                 </li>
+
             </ul>
         </div>
     </nav>
-    <div class="container">
-        {% block content %}
-        <!-- Page content goes here -->
-        {% endblock %}
-    </div>
+
+    {% block content %}
+    <!-- Page content goes here -->
+    {% endblock %}
+
+
     <script src="{% static 'js/main.js' %}"></script>
 </body>
 

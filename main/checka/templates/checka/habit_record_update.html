@@ -1,9 +1,12 @@
 {% extends 'base.html' %}
 {% block title %}Update {{ record.habit.name }}'s Record{% endblock %}
 {% block content %}
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Save</button>
-</form>
+<div class="container">
+    <h3>Update {{ record.habit.name }}'s Record</h3>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn-solid">Save</button>
+    </form>
+</div>
 {% endblock %}
