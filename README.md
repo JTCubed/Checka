@@ -25,3 +25,30 @@ cd checka
 ### 2. Create a virtual environment
 ```bash
 python3 -m venv env
+```
+
+### 3. Activate the virtual environment
+```bash
+source env/bin/activate   # On Linux/Mac
+env\Scripts\activate      # On Windows
+```
+
+### 4. Install dependencies
+```bash
+pip install -r requirements.txt
+```
+
+### 5. Apply migrations
+ ```bash
+ python manage.py migrate
+ ```
+
+### 6. Create a superuser (admin)
+```bash
+python manage.py createsuperuser
+```
+
+### 7. Run the development server
+```bash
+python manage.py runserver
+```
