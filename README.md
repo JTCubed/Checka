@@ -20,3 +20,7 @@ It helps you build and maintain healthy habits by letting you record, track, and
 ```bash
 git clone https://github.com/JTCubed/Checka.git
 cd checka
+
+### 2. Create a virtual environment
+```bash
+python3 -m venv env
